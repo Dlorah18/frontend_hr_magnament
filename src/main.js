@@ -5,6 +5,7 @@ import axios from 'axios'
 import VueAxios  from 'vue-axios'
 
 import './assets/main.css'
+import "./assets/css/IniciarSesion.css"
 
 const app = createApp(App)
 
