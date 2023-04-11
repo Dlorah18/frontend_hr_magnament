@@ -1,4 +1,3 @@
-<style scoped src="@/assets/css/IniciarSesion.css"/>
 <template>
    <div class="limiter">
 		<div class="centrar">
@@ -62,14 +61,12 @@ export default{
 	},methods:{
 
 		Login(){
-			this.checkform()
 			const reponse=loginServices(this.usuario,this.pass).then(res=>{
 				if(res.status==200){
 					router.push("Inicio")
 				}	
 			}).catch(error=>{
 				console.log("aqui error "+error)
-				
 				this.error=true
 				this.error_msg=error.response.data.message
 				this.urlImg="error.svg"
