@@ -6,6 +6,6 @@ export async function loginServices(usuario,pass) {
         "password":pass
     }
     console.log("request "+request)
-    const response = await axios.post('http://localhost:3005/ListarUsuario', request)
+    const response = await axios.post('http://localhost:3005/Login', request)
     return response.data
 }
