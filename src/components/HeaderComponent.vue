@@ -1,4 +1,3 @@
-<style scoped src="../assets/css/Header.css"></style>
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 </script>
@@ -14,7 +13,7 @@ import { RouterLink, RouterView } from 'vue-router'
                 </div>
                 <div class="item-menu">
                     <ul>
-                        <li><a href="#about">Gestiónar de Usuario</a></li>
+                        <li><RouterLink to="/Usuario">Gestiónar de Usuario</RouterLink></li>
                         <li><a href="#portfolio">Gestionar Personal</a></li>
                         <li><a href="#services">Gestionar Candidatos</a></li>
                         <li><a href="#gallery">Evaluar Candidatos</a></li>
