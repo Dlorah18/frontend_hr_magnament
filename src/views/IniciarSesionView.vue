@@ -3,9 +3,9 @@
 		<div class="centrar">
 			<div class="login">
 				<form v-on:submit.prevent="Login" class="loginFormulario">
-					<span class="logo p-b-48">
+					<div class="logo p-b-48 containerCenterimg">
 						<img src="../assets/logoHR_MAGNAMENT.png" />
-					</span>
+					</div>
 					<div class="container-input">
 						<input class="input-text" type="text" name="usuario"  placeholder="Usuario" v-model="usuario" required>
 						<span class="focus-input-text"></span>
@@ -49,7 +49,6 @@ export default{
 	components:{
 		ModalComponent
 	},
-
 	data(){
 		return{
 			usuario:null,
@@ -63,7 +62,7 @@ export default{
 		Login(){
 			const reponse=loginServices(this.usuario,this.pass).then(res=>{
 				if(res.status==200){
-					router.push("Inicio")
+					router.push({ name:"Inicio",query:{idUser:res.data.id}})
 				}	
 			}).catch(error=>{
 				console.log("aqui error "+error)
