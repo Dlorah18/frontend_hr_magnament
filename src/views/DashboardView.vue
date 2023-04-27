@@ -33,13 +33,13 @@ export default {
     methods: {
         userData() {
             const reponse = userData(this.idUser).then(res => {
-                this.Username = res.data.nombres + " " + res.data.apellidos
-                this.idRol = res.data.idRol
-                this.nameRol = res.data.nomRol
+                this.Username = res.data[0].nombres + " " + res.data[0].apellidos
+                this.idRol = res.data[0].idRol
+                this.nameRol = res.data[0].nomRol
             })
         }
     },
-    mounted() {
+    created() {
         this.idUser = this.$route.query.idUser
         this.userData()
         localStorage.setItem("idUser", this.idUser);

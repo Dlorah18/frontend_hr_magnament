@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import '../assets/css/util.css';
 
 * {
@@ -7,7 +7,6 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
   color:black;
-  font-weight: bold;
 }
 
 body {
@@ -46,6 +45,17 @@ body {
   background-color:#34bcfd ;
   transition: all 0.5s ease 0s;
 }
+
+/*Letra Estado Inicio*/
+.activate-state{
+  color: green;
+  font-weight: bold;
+}
+.inactivate-state{
+  color:red;
+  font-weight: bold;
+}
+/*Letra Estado fin*/
 /*Filtro Inicio*/
 .filterQuery{
   display: block;
@@ -691,6 +701,7 @@ button:hover {
   color: #333333;
   line-height: 1.5;
 }
+
 
 /*responsive*/
 @media (max-width: 576px) {

@@ -1,5 +1,5 @@
 <template>
-   <div class="limiter">
+	<div class="limiter">
 		<div class="centrar">
 			<div class="login">
 				<form v-on:submit.prevent="Login" class="loginFormulario">
@@ -7,19 +7,21 @@
 						<img src="../assets/logoHR_MAGNAMENT.png" />
 					</div>
 					<div class="container-input">
-						<input class="input-text" type="text" name="usuario"  placeholder="Usuario" v-model="usuario" required>
+						<input class="input-text" type="text" name="usuario" placeholder="Usuario" v-model="usuario"
+							required>
 						<span class="focus-input-text"></span>
 					</div>
 
 					<div class="container-input">
-						<input class="input-text" type="password" name="pass" placeholder="Contraseña" v-model="pass" required>
+						<input class="input-text" type="password" name="pass" placeholder="Contraseña" v-model="pass"
+							required>
 						<span class="focus-input-text"></span>
 					</div>
 
 					<div class="container-btn">
 						<div class="form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button  type="submit" class="login100-form-btn">
+							<button type="submit" class="login100-form-btn">
 								Iniciar Sesion
 							</button>
 						</div>
@@ -43,40 +45,41 @@
 
 <script>
 import router from "../router"
-import {loginServices} from "../services/SesionServices"
+import { loginServices } from "../services/SesionServices"
 import ModalComponent from "../components/ModalComponent.vue"
-export default{
-	components:{
+export default {
+	components: {
 		ModalComponent
 	},
-	data(){
-		return{
-			usuario:null,
-			pass:null,
-			error:false,
-			error_msg:"",
-			urlImg:""
+	data() {
+		return {
+			usuario: null,
+			pass: null,
+			error: false,
+			error_msg: "",
+			urlImg: ""
 		}
-	},methods:{
+	}, methods: {
 
-		Login(){
-			const reponse=loginServices(this.usuario,this.pass).then(res=>{
-				if(res.status==200){
-					router.push({ name:"Inicio",query:{idUser:res.data.id}})
-				}	
-			}).catch(error=>{
-				console.log("aqui error "+error)
-				this.error=true
-				this.error_msg=error.response.data.message
-				this.urlImg="error.svg"
+		Login() {
+			const reponse = loginServices(this.usuario, this.pass).then(res => {
+				console.log(res)
+				if (res.status == 200) {
+					router.push({ name: "Inicio", query: { idUser: res.data[0].id } })
+				}
+			}).catch(error => {
+				console.log("aqui error " + error)
+				this.error = true
+				this.error_msg = error.response.data.message
+				this.urlImg = "error.svg"
 
 			})
-			
-			
+
+
 		}
 	}
 
-	
+
 }
 </script>
 

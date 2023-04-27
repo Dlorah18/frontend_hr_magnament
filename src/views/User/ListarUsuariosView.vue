@@ -4,14 +4,10 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
     <HeaderComponent :idRol="idRol"></HeaderComponent>
     <div class="container-secsion">
-        <div class="filterQuery">
+        <form class="filterQuery">
             <span>
                 <label for="username">Usuario</label>
                 <input class="text-input" type="text" name="username">
-            </span>
-            <span>
-                <label for="dateUser">Fecha desde</label>
-                <input class="date-input" type="date" name="dateUser">
             </span>
             <span>
                 <label for="stateUser">Estado</label>
@@ -40,12 +36,13 @@ import { RouterLink, RouterView } from 'vue-router'
                     <input class="button-cancel" type="button" value="Limpiar">
                 </span>
             </div>
-        </div>
-        <TableComponent></TableComponent>
+        </form>
+        <TableComponent :data="data"></TableComponent>
     </div>
 </template>
 <script>
 import { userData } from "../../services/SesionServices";
+import { listUsers } from "../../services/AdministradorServices";
 import TableComponent from '../../components/User/TableComponent.vue';
 import HeaderComponent from '../../components/HeaderComponent.vue';
 
@@ -55,19 +52,28 @@ export default {
         HeaderComponent
     }, data() {
         return {
-            idRol:null,
-            idUser:null
+            idRol: null,
+            idUser: null,
+            data: null
         }
-    }, methods: {
+    },
+    methods: {
         userData() {
             const reponse = userData(this.idUser).then(res => {
-                this.idRol = res.data.idRol
+                this.idRol = res.data[0].idRol
+            })
+        }
+        , listUsers() {
+            const response = listUsers().then(res => {
+                this.data = res.data
             })
         }
 
-    },mounted() {
+    },
+    created() {
         this.idUser = localStorage.getItem("idUser")
         this.userData()
+        this.listUsers()
     }
 
 }

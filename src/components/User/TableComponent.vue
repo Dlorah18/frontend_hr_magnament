@@ -13,74 +13,64 @@
                         <th>Rol</th>
                         <th>Estado</th>
                         <th>Fecha Creacion</th>
+                        <th>Accion</th>
                     </tr>
                 </thead>
-                <tbody v-for="registro in datos">
-                    <tr v-for="elemento in registro">
-                        <td>{{ elemento.Codigo }}</td>
-                        <td>{{ elemento.Nombres }}</td>
-                        <td>{{ elemento.Apellidos }}</td>
-                        <td>{{ elemento.Rol }}</td>
-                        <td>{{ elemento.Estado }}</td>
-                        <td>{{ elemento.FechaCreacion }}</td>
+                <tbody>
+                    <tr v-for="registro in data">
+                        <td>{{ registro.id }}</td>
+                        <td>{{ registro.nombres }}</td>
+                        <td>{{ registro.apellidos }}</td>
+                        <td>{{ registro.nomRol }}</td>
+                        <td v-bind:class="{
+                            'activate-state': registro.estado === 'Activo',
+                            'inactivate-state': registro.estado === 'Inactivo'
+                        }">
+                            {{ registro.estado }}
+                        </td>
+                        <td>{{ registro.fechaCreacion }}</td>
+                        <td>Accion</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div>
-            
+            <paginate v-model="currentPage" :page-count="pageCount" :margin-pages="2" :prev-text="'Anterior'"
+                :next-text="'Siguiente'" :container-class="'pagination'" :page-class="'page-item'" :active-class="'active'"
+                :disabled-class="'disabled'"></paginate>
         </div>
     </div>
 </template>
 <script>
-import Paginate from 'vue-paginate'
+import Paginate from 'vuejs-paginate'
+
 export default {
-    components: {
+    components:{
         Paginate
+    },
+    props: {
+        data: Array
     },
     data() {
         return {
-            datos: null,
-            currentPage: 1,  // El número de la página actual
-            registrosPagina: 10,
+            itemsPerPage: 10,
+            currentPage: 1
         }
-    }, mounted() {
-        this.datos = {
-            datos: [
-                {
-                    'Codigo': "1",
-                    'Nombres': "2",
-                    'Apellidos': "3",
-                    'Rol': "4",
-                    'Estado': "5",
-                    'FechaCreacion': "6"
-                },
-                {
-                    'Codigo': "1",
-                    'Nombres': "2",
-                    'Apellidos': "3",
-                    'Rol': "4",
-                    'Estado': "5",
-                    'FechaCreacion': "6"
-                },
-                {
-                    'Codigo': "1",
-                    'Nombres': "2",
-                    'Apellidos': "3",
-                    'Rol': "4",
-                    'Estado': "5",
-                    'FechaCreacion': "6"
-                },
-                {
-                    'Codigo': "1",
-                    'Nombres': "2",
-                    'Apellidos': "3",
-                    'Rol': "4",
-                    'Estado': "5",
-                    'FechaCreacion': "6"
-                }
-            ]
+    }, methods: {
+        paginatedItems() {
+            const startIndex = (this.currentPage - 1) * this.itemsPerPage
+            const endIndex = startIndex + this.itemsPerPage
+            return this.data.slice(startIndex, endIndex)
+        },
+        pageCount() {
+            return Math.ceil(this.data.length / this.itemsPerPage)
         }
+    },
+    created() {
+        console.log(this.data)
+    },
+    mounted() {
+
     }
 }
 

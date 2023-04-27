@@ -47,11 +47,11 @@ export default {
     }, methods: {
         userData() {
             const reponse = userData(this.idUser).then(res => {
-                this.idRol = res.data.idRol
+                this.idRol = res.data[0].idRol
             })
         }
 
-    },mounted() {
+    },created() {
         this.idUser = localStorage.getItem("idUser")
         this.userData()
     }
