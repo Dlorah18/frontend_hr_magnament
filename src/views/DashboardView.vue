@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 <template>
     <Header :idRol="idRol"></Header>
-    <div class="container-secsion">
+    <div class="container-secsion container">
         <div class="containerCenterimg">
             <div>
                 <img class="message" src="../assets/perfil-del-usuario.png">
