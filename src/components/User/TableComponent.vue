@@ -1,21 +1,21 @@
+<script setup>
+import { RouterLink, RouterView } from "vue-router";
+</script>
 <template>
   <div class="row">
-    <div class="container-table">
+    <div class="container-table container-fluid">
       <table>
         <thead>
           <tr>
-            <th>Codigo</th>
             <th>Nombres</th>
             <th>Apellidos</th>
             <th>Rol</th>
             <th>Estado</th>
-            <th>Fecha Creacion</th>
             <th>Accion</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="registro in data">
-            <td>{{ registro.id }}</td>
             <td>{{ registro.nombres }}</td>
             <td>{{ registro.apellidos }}</td>
             <td>{{ registro.nomRol }}</td>
@@ -25,15 +25,12 @@
             }">
               {{ registro.estado }}
             </td>
-            <td>{{ registro.fechaCreacion }}</td>
             <td>
               <div class="row">
-                <div class="col-6">
-                  <img  class="icon" src="../../../public/images/lupa.png">
-                </div>
-                <div class="col-6">
-                  <img class="icon" src="../../../public/images/editar.png">
-                </div>
+                <RouterLink :to="'/ListarUsuario/' + registro.id" class="hover-icon col-12 btn">
+                    <img class="icon" src="../../../public/images/lupa.png">
+                </RouterLink>
+
               </div>
             </td>
           </tr>
@@ -45,20 +42,29 @@
 <script>
 import { listUsers } from "../../services/AdministradorServices";
 export default {
+  props: {
+    rolFilter: Number,
+    userFilter: String,
+    stateFilter: String
+
+  },
   data() {
     return {
-      data: null
+      data: null,
     };
   },
   methods: {
-    listUsers() {
-      const response = listUsers().then((res) => {
+    listUsers() {    
+      const response = listUsers(this.rolFilter,this.userFilter,this.stateFilter).then((res) => {
         this.data = res.data;
       });
     },
   },
   created() {
     this.listUsers()
+  },beforeUpdate(){
+    this.listUsers()
+    
   }
 };
 </script>

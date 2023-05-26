@@ -11,6 +11,7 @@
                         <th>Numeros Vacantes</th>
                         <th>Proyecto</th>
                         <th>Pais</th>
+                        <th>Accion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,14 @@
                         <td>Numeros Vacantes</td>
                         <td>Proyecto</td>
                         <td>Pais</td>
+                        <td>
+                            <div class="row">
+                                <RouterLink :to="'/ListarUsuario/'" class="hover-icon col-12 btn">
+                                    <img class="icon" src="../../../public/images/lupa.png">
+                                </RouterLink>
+
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

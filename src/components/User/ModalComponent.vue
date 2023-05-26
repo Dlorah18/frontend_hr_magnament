@@ -17,9 +17,8 @@ import { RouterLink, RouterView } from "vue-router";
             </div>
             <div  class="col-lg-6">
               <input style="position: absolute;" v-if="redirec===null" class="btn button-cancel btn-sm" @click="$emit('close')" type="text" value="Cerrar">
-              <RouterLink  v-else :to="redirec" >
                 <input style="position: absolute;" class="btn button-sucess btn-sm" @click="$emit('close')" type="text" value="OK">       
-              </RouterLink>
+              
             </div>
             
           </div>
@@ -33,7 +32,6 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   props: {
-    img: String,
     msg: String,
     redirec: String
   }

@@ -281,7 +281,7 @@ img {
 
 }
 
-/*
+
 .movedown {
   margin: 0 auto;
 }
@@ -353,7 +353,7 @@ img {
   100% {
     transform: scale(1);
   }
-}*/
+}
 
 /* Fin Modal*/
 /*TAG*/
@@ -685,9 +685,37 @@ button:hover {
 }
 .icon{
   width: 20px;
-  width: 20px;
+  height: 20px;
+  position: static;
+}
+.icon-created{
+  width: 30px;
+  height: 30px;
+  position: static;
 }
 
+.hover-icon:hover{
+  background-color:#34bcfd ;
+  border-radius: 5%;
+}
+/*Inicio tabla registro*/
+.container-registro{
+  padding: 5%;
+}
+.container-head{
+  color:white;
+  background-color: #7a6afe;
+  padding:10px; 
+  border-radius:5px
+}
+.font-head-reg{
+  color: white;
+  font-weight: bolder;
+}
+.column-rg{
+  font-weight: bold;
+}
+/*Fin tabla registro*/
 /*responsive*/
 @media (max-width: 576px) {
   .login {

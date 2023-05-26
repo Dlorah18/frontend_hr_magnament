@@ -7,7 +7,7 @@
 						<img src="../assets/logoHR_MAGNAMENT.png" />
 					</div>
 					<div class="container-input">
-						<input class="input-text" type="text" name="usuario" placeholder="Usuario" v-model="usuario"
+						<input class="input-text" type="number" name="usuario" placeholder="Usuario" v-model="usuario"
 							required>
 						<span class="focus-input-text"></span>
 					</div>
@@ -27,7 +27,7 @@
 						</div>
 					</div>
 
-					<div class="text-center p-t-115">
+					<!--<div class="text-center p-t-115">
 						<span class="txt1">
 							Olvidaste tu contraseña
 						</span>
@@ -35,12 +35,12 @@
 						<a class="txt2" href="#">
 							Aqui
 						</a>
-					</div>
+					</div>-->
 				</form>
 			</div>
 		</div>
 	</div>
-	<ModalComponent v-if="error" :img="urlImg" :msg="error_msg" @close="error = false"></ModalComponent>
+	<ModalComponent v-if="error!==null" :redirec="redirec" :img="urlImg" :msg="msg" @close="error = null"></ModalComponent>
 </template>
 
 <script>
@@ -55,24 +55,25 @@ export default {
 		return {
 			usuario: null,
 			pass: null,
-			error: false,
-			error_msg: "",
-			urlImg: ""
+			error: null,
+			msg: "",
+			urlImg: "",
+			redirec:null
 		}
 	}, methods: {
 
 		Login() {
 			const reponse = loginServices(this.usuario, this.pass).then(res => {
+				this.error=null
 				console.log(res)
 				if (res.status == 200) {
 					router.push({ name: "Inicio", query: { idUser: res.data[0].id } })
 				}
 			}).catch(error => {
-				console.log("aqui error " + error)
 				this.error = true
-				this.error_msg = error.response.data.message
+				this.msg = error.response.data.message
 				this.urlImg = "error.svg"
-
+				this.redirec=null
 			})
 
 
